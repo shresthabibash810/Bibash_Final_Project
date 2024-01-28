@@ -4,7 +4,7 @@ def login():
     username = input("User: ")
     password = getpass.getpass("Password: ")
 
-    # Hash the password
+    #Encoding the password using rot-13
     encode_password = codecs.encode(password, 'rot_13')
 
     # Check if the user exists and the password is correct

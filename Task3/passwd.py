@@ -6,11 +6,11 @@ def change_password():
     new_password = getpass.getpass("New Password: ")
     confirm_password = getpass.getpass("Confirm: ")
 
-    # Hash the passwords
-    current_hash = codecs.encode(current_password, 'rot_13')
-    new_hash = codecs.encode(new_password, 'rot_13')
+    # Encoding the current and new password using rot-13
+    encode_current_pw = codecs.encode(current_password, 'rot_13')
+    encode_new_pw = codecs.encode(new_password, 'rot_13')
 
-    # Read the file
+    # Reading the file
     with open("passwd.txt", "r") as file:
         lines = file.readlines()
 
@@ -19,9 +19,9 @@ def change_password():
         for line in lines:
             parts = line.split(":")
             if parts[0] == username:
-                if parts[2].strip() == current_hash:
+                if parts[2].strip() == encode_current_pw:
                     found = True
-                    file.write(f"{parts[0]}:{parts[1]}:{new_hash}\n")
+                    file.write(f"{parts[0]}:{parts[1]}:{encode_new_pw}\n")
                     print("Password changed.")
                 else:
                     print("Invalid current password. Nothing changed.")
